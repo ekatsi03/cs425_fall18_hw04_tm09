@@ -34,20 +34,47 @@ include 'db.php';
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
             
-    <script src="javascript.js"></script> 
+    <script src="javascript.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script> 
+    <script src="ajaxCall.js"></script> 
 
     <?php
-      $sql = "SELECT * FROM general INNER JOIN efficiency ON general.pvID = efficiency.pvID INNER JOIN hardware ON efficiency.pvID = hardware.pvID;";
+
+      $sql  = $dbh->query("SELECT * FROM general INNER JOIN efficiency ON general.pvID = efficiency.pvID INNER JOIN hardware ON efficiency.pvID = hardware.pvID");
+      $rows = array();
+      while ($row = $sql->fetchall()) {
+          $rows[] = $row;
+      }
+      $fp = fopen('results.json', 'w');
+      fwrite($fp, json_encode($rows));
+      fclose($fp);
+      
+     // echo json_encode($rows);
+      /*
+      $sql  = $dbh->query("SELECT * FROM general INNER JOIN efficiency ON general.pvID = efficiency.pvID INNER JOIN hardware ON efficiency.pvID = hardware.pvID");     
+      $pv_records = $sql->fetchAll();
+      foreach ($pv_records as $pv_record) {
+          echo $pv_record['name'] . '<br />';
+      }
+*/
+      //https://www.w3schools.com/PHP/php_ajax_database.asp
+      //https://stackoverflow.com/questions/27079083/fetch-data-from-db-using-ajax-jquery
+
+     /* $sql = "SELECT * FROM general INNER JOIN efficiency ON general.pvID = efficiency.pvID INNER JOIN hardware ON efficiency.pvID = hardware.pvID";
       mysqli_select_db($conn, 'testdb');
       $retval = mysqli_query($conn, $sql);
       define('MYSQL_ASSOC',MYSQLI_ASSOC);
-
+  
       if(!$retval)
         die('Could not get data:'.mysqli_error());
+        
+        $rows = array();
     
         while($row = mysqli_fetch_array($retval,MYSQL_ASSOC)){
          // $_SESSION["name"] = $row['name'];
+         $rows[] = $row;
 
+         echo "JSON DATA: ".json_encode($row);
         
           echo "<script>  var f = document.createElement(\"form\");
           f.setAttribute('method',\"post\");
@@ -101,8 +128,7 @@ include 'db.php';
           var s = document.createElement(\"button\"); //input element, Submit button
           s.setAttribute('type',\"submit\");
           s.innerHTML = \"Save Changes\";
-          
-          
+                    
           f.appendChild(label_name);
           f.appendChild(textbox_name);
           f.appendChild(document.createElement(\"br\"));
@@ -153,7 +179,11 @@ include 'db.php';
           L.marker([".$row['latitude'].",". $row['longitude']."]).addTo(mymap)
                .bindPopup(f).openPopup();</script>";
         }
+
+        //echo "JSON DATA: ".json_encode($retval);*/
         ?>
+
+
 
   </body>
 </html>

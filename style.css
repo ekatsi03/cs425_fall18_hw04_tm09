@@ -19,3 +19,7 @@ html, body,#mapid {
      padding:10px 50px 10px 50px;
 
  }
+
+ #markers{
+     background-color: red;
+ }
