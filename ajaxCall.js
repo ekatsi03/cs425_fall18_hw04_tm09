@@ -1,16 +1,24 @@
 //POST REQUEST
-
+/*$(document).on('click','#save',function(e) {
+    var data = $("#form_add").serialize();
+    $.ajax({
+           data: data,
+           type: "post",
+           url: "insert.php",
+           success: function(data){
+                alert("Data Save: " + data);
+           }
+  });
+   });*/
 
 
 $(document).ready(function(){
-    alert("sto document ready");
     $(document).delegate('#addButton', 'click', function (event) {
         event.preventDefault();
-        alert('clicked on button save');
 
         //serialize form data
 
-        var url = $('form').serialize();
+        var url = $('#form_add').serialize();
 
         //alert("URL: " + url);
 
@@ -62,7 +70,7 @@ $(document).ready(function(){
 
             error:function(){
 
-                alert('Could not be posted');
+                //alert('Could not be posted');
 
             }
 

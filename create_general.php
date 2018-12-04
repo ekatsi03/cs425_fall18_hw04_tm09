@@ -9,7 +9,7 @@
   include_once 'General.php';
   // Instantiate DB & connect
   $database = new Database();
-  $db = $database->getConnection();
+  $db = $database->connect();
 
   // Instantiate blog post object
   $general = new General($db);
@@ -22,13 +22,13 @@
   // Get raw posted data
   $data = json_decode(file_get_contents("php://input"));
 
- /* if(
+  if(
     !empty($data->name) &&
     !empty($data->address) &&
     !empty($data->operator) &&
     !empty($data->commission_date)&&
     !empty($data->description)
-){*/
+){
 
   $general->name = $data->name;
   $general->address = $data->address;
@@ -51,7 +51,7 @@
       array('message' => 'General Record Not Created')
     );
   }
-/*
+
 }
 
 else{
@@ -60,4 +60,4 @@ else{
  
     // tell the user
     echo json_encode(array("message" => "Unable to create general record. Data is incomplete."));
-}*/
+}
