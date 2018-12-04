@@ -22,28 +22,107 @@ function onMapClick(e) {
 
   //add pv
   var f = document.createElement("form");
+  f.setAttribute('method',"post");
+        f.setAttribute('action',"insert.php");
+        f.setAttribute('id',"form_add");
 
         var label_name=createLabelForm("Name");
-        var textbox_name= createTextboxForm("Name","Enter name:");
+        var textbox_name= createTextboxForm("Name","");
 
         var label_address=createLabelForm("Address");
-        var textbox_address= createTextboxForm("Address","Enter Address:");
+        var textbox_address= createTextboxForm("Address","");
 
+        var label_operator=createLabelForm("Operator");
+        var textbox_operator= createTextboxForm("Operator", "");
         
+        var label_commissionDate=createLabelForm("Commission Date");
+        var textbox_commissionDate= createTextboxForm("CommissionDate","");
+        
+        var label_description=createLabelForm("Description");
+        var textbox_description= createTextboxForm("Description","");
+        
+        var label_power=createLabelForm("System Power");
+        var textbox_power= createTextboxForm("SystemPower","");
+        
+        var label_annualProduction=createLabelForm("Annual Production");
+        var textbox_annualProduction= createTextboxForm("AnnualProduction","");
+        
+        var label_C02avoided=createLabelForm("CO2 Avoided");
+        var textbox_C02avoided= createTextboxForm("CO2Avoided","");
+        
+        var label_reimbursement=createLabelForm("Reimbursement");
+        var textbox_reimbursement= createTextboxForm("Reimbursement","");
+        
+        var label_solarPanelModules=createLabelForm("Solar Panel Modules");
+        var textbox_solarPanelModules= createTextboxForm("SolarPanelModules","");
+        
+        var label_azimuthAngle=createLabelForm("Azimuth Angle");
+        var textbox_azimuthAngle= createTextboxForm("AzimuthAngle","");
+        
+        var label_inclinationAngle=createLabelForm("Inclination Angle");
+        var textbox_inclinationAngle= createTextboxForm("InclinationAngle","");
+        
+        var label_communication=createLabelForm("Communication");
+        var textbox_communication= createTextboxForm("Communication","");
+        
+        var label_inverter=createLabelForm("Inverter");
+        var textbox_inverter= createTextboxForm("Inverter","");
+        
+        var label_sensors=createLabelForm("Sensors");
+        var textbox_sensors= createTextboxForm("Sensors","");
+                
         var s = document.createElement("input"); //input element, Submit button
         s.setAttribute('type',"submit");
         s.setAttribute('id','addButton');
         s.setAttribute('name', 'addButton');
         s.setAttribute('value','Add PV');
-        //s.innerHTML = "Add PV";
+        
                   
         f.appendChild(label_name);
         f.appendChild(textbox_name);
         f.appendChild(document.createElement("br"));
         f.appendChild(label_address);
-        f.appendChild(textbox_address);
-        
-       
+        f.appendChild(textbox_address);        
+        f.appendChild(document.createElement("br"));
+        f.appendChild(label_operator);
+        f.appendChild(textbox_operator);
+        f.appendChild(document.createElement("br"));
+        f.appendChild(label_commissionDate);
+        f.appendChild(textbox_commissionDate);
+        f.appendChild(document.createElement("br"));
+        f.appendChild(label_description);
+        f.appendChild(textbox_description);
+        f.appendChild(document.createElement("br"));
+        f.appendChild(label_power);
+        f.appendChild(textbox_power);
+        f.appendChild(document.createElement("br"));
+        f.appendChild(label_annualProduction);
+        f.appendChild(textbox_annualProduction);
+        f.appendChild(document.createElement("br"));
+        f.appendChild(label_C02avoided);
+        f.appendChild(textbox_C02avoided);
+        f.appendChild(document.createElement("br"));
+        f.appendChild(label_reimbursement);
+        f.appendChild(textbox_reimbursement);
+        f.appendChild(document.createElement("br"));
+        f.appendChild(label_solarPanelModules);
+        f.appendChild(textbox_solarPanelModules);
+        f.appendChild(document.createElement("br"));
+        f.appendChild(label_azimuthAngle);
+        f.appendChild(textbox_azimuthAngle);
+        f.appendChild(document.createElement("br"));
+        f.appendChild(label_inclinationAngle);
+        f.appendChild(textbox_inclinationAngle);
+        f.appendChild(document.createElement("br"));
+        f.appendChild(label_communication);
+        f.appendChild(textbox_communication);
+        f.appendChild(document.createElement("br"));
+        f.appendChild(label_inverter);
+        f.appendChild(textbox_inverter);
+        f.appendChild(document.createElement("br"));
+        f.appendChild(label_sensors);
+        f.appendChild(textbox_sensors);   
+        f.appendChild(document.createElement("br"));   
         f.appendChild(s); 
         
         var lat = (e.latlng.lat);
@@ -104,7 +183,7 @@ xmlhttp.onreadystatechange = function() {
          // alert("name "+parseFloat(myObj[0][i].latitude)+", "+ myObj[0][i].longitude+" length:"+myObj[0].length);
        
        
-       /*  var f = document.createElement("form");
+       var f = document.createElement("form");
         f.setAttribute('method',"post");
         f.setAttribute('action',"submit.php");
 
@@ -156,6 +235,10 @@ xmlhttp.onreadystatechange = function() {
         var s = document.createElement("button"); //input element, Submit button
         s.setAttribute('type',"submit");
         s.innerHTML = "Save Changes";
+
+        var del = document.createElement("button"); //input element, Submit button
+        del.setAttribute('type',"submit");
+        del.innerHTML = "Delete the PV";
                   
         f.appendChild(label_name);
         f.appendChild(textbox_name);
@@ -203,9 +286,11 @@ xmlhttp.onreadystatechange = function() {
         f.appendChild(textbox_sensors);
        
         f.appendChild(s); 
+        f.appendChild(document.createElement("br"));
+        f.appendChild(del); 
         
         L.marker([myObj[0][i].latitude,myObj[0][i].longitude]).addTo(mymap)
-             .bindPopup(f).openPopup();*/
+             .bindPopup(f).openPopup();
     }
     }
 };
